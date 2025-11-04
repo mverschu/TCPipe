@@ -1,4 +1,3 @@
-// File: TcpProxy.cs
 using System;
 using System.Net;
 using System.Net.Sockets;
