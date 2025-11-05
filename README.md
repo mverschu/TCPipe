@@ -60,7 +60,7 @@ graph TD
     A[PetitPotam Trigger] --> B[HOSTB<br/>WebDAV Enabled<br/>Domain User Auth]
     B --> C[HOSTA:8888<br/>Low Priv Access<br/>TCPipe 8888 attackerip 80]
     C --> D[TCP Forwarder<br/>Port 8888]
-    D --> E[publicattckerip:80<br/>Root Owned VM<br/>ntlmrelayx.py listener]
+    D --> E[publicattackerip:80<br/>Root Owned VM<br/>ntlmrelayx.py listener]
     E --> F[ntlmrelayx<br/>Relay Service<br/>over SOCKS]
     F --> G[Domain Controller<br/>LDAP/LDAPS]
     G --> H[RBCD Compromise<br/>on HOSTB]
