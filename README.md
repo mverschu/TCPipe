@@ -46,17 +46,17 @@ The diagram visualizes how we weaponize SOCKS proxy access into a full NTLM rela
 |------|------|-------------|
 | **HOSTB** | WebDAV enabled target | No access yet (just domain user auth) |
 | **HOSTA** | Pivot host | Low priv access (via RDP/user compromise) |
-| **ATTACKER** | Attack platform | Root/owned VM or device |
+| **ATTACKER** | Attack platform | Root/owned (public IP) |
 
 ### Flow
 
 ```mermaid
 graph TD
     %% Attack flow
-    A[PetitPotam Trigger] --> B[HOSTB<br/>WebDAV Enabled<br/>No Access Yet]
+    A[PetitPotam Trigger] --> B[HOSTB<br/>WebDAV Enabled<br/>Domain User Auth]
     B --> C[HOSTA:8888<br/>Low Priv Access<br/>TCPipe 8888 attackerip 80]
     C --> D[TCP Forwarder<br/>Port 8888]
-    D --> E[attackerip:80<br/>Root Owned VM<br/>ntlmrelayx.py listener]
+    D --> E[publicattckerip:80<br/>Root Owned VM<br/>ntlmrelayx.py listener]
     E --> F[ntlmrelayx<br/>Relay Service<br/>]
     F --> G[Domain Controller<br/>LDAP/LDAPS]
     G --> H[RBCD Compromise<br/>on HOSTB]
