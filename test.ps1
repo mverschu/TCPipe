@@ -8,7 +8,8 @@ function Start-TcpProxy {
     $listener = [System.Net.Sockets.TcpListener]::new([System.Net.IPAddress]::Any, $ListenPort)
     $listener.Start()
     
-    Write-Host "Listening on 0.0.0.0:$ListenPort -> $RemoteHost:$RemotePort"
+    # FIXED: Use string formatting
+    Write-Host ("Listening on 0.0.0.0:{0} -> {1}:{2}" -f $ListenPort, $RemoteHost, $RemotePort)
     
     while ($true) {
         $client = $listener.AcceptTcpClient()
@@ -63,6 +64,3 @@ function Start-TcpProxy {
         } -ArgumentList $client, $RemoteHost, $RemotePort
     }
 }
-
-# Usage:
-# Start-TcpProxy -ListenPort 8080 -RemoteHost "example.com" -RemotePort 80
